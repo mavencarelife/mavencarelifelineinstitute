@@ -112,6 +112,18 @@ function renderTableCatalog(selector = '#course-table') {
   target.setAttribute('aria-busy', 'false');
 }
 
+function populateInquiryCourses() {
+  const courseFields = document.querySelectorAll('select[data-course-field]');
+  for (const field of courseFields) {
+    for (const course of getCourseList()) {
+      const option = document.createElement('option');
+      option.value = course.name;
+      option.textContent = course.name;
+      field.append(option);
+    }
+  }
+}
+
 function setInquiryCourseFromQuery() {
   const params = new URLSearchParams(window.location.search);
   const selectedCourse = params.get('course');
@@ -316,6 +328,7 @@ function bindCourseFilter() {
 
 renderFeaturedCourses();
 renderTableCatalog();
+populateInquiryCourses();
 setInquiryCourseFromQuery();
 configureWhatsAppLinks();
 populateConfigurableContent();
