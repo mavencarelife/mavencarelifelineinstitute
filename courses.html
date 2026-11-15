@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Browse the full course catalog for Maven Care Lifeline Training Institute, including durations and fees for the January 2027 intake." />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Courses | Maven Care Lifeline Training Institute" />
+    <meta property="og:description" content="Browse course names, durations, and fees from the institute's supplied course information." />
+    <meta property="og:image" content="assets/images/stethoscope-hero.jpg" />
+    <title>Courses | Maven Care Lifeline Training Institute</title>
+    <link rel="icon" type="image/png" href="assets/images/mavencare%20logo.png" />
+    <link rel="stylesheet" href="css/styles.css" />
+    <script>document.documentElement.classList.add('js-enabled');</script>
+    <script defer src="js/script.js"></script>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">Skip to content</a>
+    <header class="site-header">
+      <div class="container header-row">
+        <a href="index.html" class="brand" aria-label="Maven Care Lifeline Training Institute home">
+          <img src="assets/images/mavencare%20logo.png" alt="Maven Care Lifeline Training Institute logo" class="brand-mark" />
+          <span class="brand-name">Maven Care Lifeline Training Institute</span>
+        </a>
+
+        <nav class="nav" id="primary-navigation" data-nav aria-label="Main navigation">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="courses.html" class="active">Courses</a>
+          <a href="admissions.html">Admissions</a>
+          <a href="faq.html">FAQs</a>
+          <a href="contact.html">Contact</a>
+        </nav>
+
+        <div class="header-actions">
+          <a class="btn btn-secondary" href="admissions.html">Admissions</a>
+          <a class="btn btn-accent" data-whatsapp-link data-whatsapp-label="Inquire on WhatsApp" href="contact.html#inquiry-form">Inquire</a>
+          <button class="mobile-toggle" type="button" aria-label="Open menu" aria-controls="primary-navigation" aria-expanded="false" data-nav-toggle>
+            <span></span>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main-content">
+      <section class="page-hero">
+        <div class="container page-hero-inner">
+          <div>
+            <span class="eyebrow">Course catalog</span>
+            <h1>Courses designed for practical, people-centred careers</h1>
+            <p>Browse our current catalog and ask for entry requirements, course details, and intake updates.</p>
+          </div>
+        </div>
+        <figure class="hero-illustration">
+          <img src="assets/images/stethoscope-hero.jpg" alt="Close-up of a blue stethoscope for the course catalog" />
+        </figure>
+      </section>
+
+      <section class="section-sm section-surface">
+        <div class="container">
+          <div class="filter-bar">
+            <div>
+              <span class="eyebrow">Search</span>
+              <h2>Find the right course</h2>
+              <p>Course titles, durations, and fees are transcribed from supplied materials and should be confirmed before enrollment.</p>
+            </div>
+            <input class="filter-input" type="search" data-course-filter placeholder="Search courses..." aria-label="Search courses" />
+          </div>
+          <p data-course-no-results hidden>No courses match that search. Try another course name.</p>
+
+          <div class="table-wrap">
+            <table class="course-table" aria-label="Course fee table">
+              <thead>
+                <tr>
+                  <th>Course</th>
+                  <th>Duration</th>
+                  <th>Fee</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="course-table" aria-busy="true">
+                <tr class="course-skeleton-row" aria-hidden="true">
+                  <td><span class="skeleton skeleton-course"></span></td>
+                  <td><span class="skeleton skeleton-duration"></span></td>
+                  <td><span class="skeleton skeleton-fee"></span></td>
+                  <td><span class="skeleton skeleton-action"></span></td>
+                </tr>
+                <tr class="course-skeleton-row" aria-hidden="true">
+                  <td><span class="skeleton skeleton-course"></span></td>
+                  <td><span class="skeleton skeleton-duration"></span></td>
+                  <td><span class="skeleton skeleton-fee"></span></td>
+                  <td><span class="skeleton skeleton-action"></span></td>
+                </tr>
+                <tr class="course-skeleton-row" aria-hidden="true">
+                  <td><span class="skeleton skeleton-course"></span></td>
+                  <td><span class="skeleton skeleton-duration"></span></td>
+                  <td><span class="skeleton skeleton-fee"></span></td>
+                  <td><span class="skeleton skeleton-action"></span></td>
+                </tr>
+                <tr class="course-skeleton-row" aria-hidden="true">
+                  <td><span class="skeleton skeleton-course"></span></td>
+                  <td><span class="skeleton skeleton-duration"></span></td>
+                  <td><span class="skeleton skeleton-fee"></span></td>
+                  <td><span class="skeleton skeleton-action"></span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <noscript><p class="form-note">Enable JavaScript to load the course catalog.</p></noscript>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="brand footer-brand">
+              <img src="assets/images/mavencare%20logo.png" alt="Maven Care Lifeline logo" class="brand-mark" />
+              <span>Maven Care Lifeline</span>
+            </div>
+            <p><span data-site-tagline>Empowering Skills. Inspiring Compassion. Transforming Lives.</span></p>
+          </div>
+          <div>
+            <h4>Quick links</h4>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="faq.html">FAQs</a></li>
+              <li><a href="admissions.html">Admissions</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Contact</h4>
+            <ul>
+              <li data-contact-phones>Phone and WhatsApp details pending confirmation</li>
+              <li data-contact-email>mavencarelife@gmail.com</li>
+              <li><a href="contact.html#inquiry-form">Prepare inquiry</a></li>
+            </ul>
+          </div>
+          <div>
+            <h4>Follow</h4>
+            <div class="footer-social" data-social-links>
+              <span data-social-empty>Social profiles to be added</span>
+            </div>
+          </div>
+        </div>
+        <div class="copyright">© <span data-year></span> Maven Care Lifeline Training Institute. All rights reserved.</div>
+      </div>
+    </footer>
+  </body>
+</html>
