@@ -36,6 +36,47 @@
 }
 *::-webkit-scrollbar-thumb:hover { background: var(--blue-600); }
 html { scroll-behavior: smooth; }
+
+@view-transition {
+  navigation: auto;
+}
+
+::view-transition-old(root) {
+  animation: 140ms ease-out both page-transition-out;
+}
+
+::view-transition-new(root) {
+  animation: 180ms ease-in both page-transition-in;
+}
+
+@keyframes page-transition-out {
+  to { opacity: 0; }
+}
+
+@keyframes page-transition-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes section-reveal {
+  from {
+    opacity: 0.72;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@supports (animation-timeline: view()) {
+  main > section:not(.hero):not(.page-hero) {
+    animation: section-reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 18%;
+  }
+}
+
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
@@ -116,8 +157,9 @@ p { margin: 0 0 1rem; color: var(--muted); }
   width: 46px;
   height: 46px;
   flex: 0 0 46px;
-  border-radius: 14px;
-  object-fit: cover;
+  border-radius: 50%;
+  background: #fff;
+  object-fit: contain;
   box-shadow: var(--shadow);
 }
 
@@ -758,6 +800,7 @@ p { margin: 0 0 1rem; color: var(--muted); }
 
 .checklist {
   list-style: none;
+  counter-reset: checklist;
   margin: 0;
   padding: 0;
   display: grid;
@@ -775,9 +818,12 @@ p { margin: 0 0 1rem; color: var(--muted); }
 }
 
 .checklist li::before {
-  content: "•";
-  font-size: 1.7rem;
-  line-height: 1;
+  counter-increment: checklist;
+  content: counter(checklist) ".";
+  flex: 0 0 1.25rem;
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  line-height: 1.6;
   color: var(--blue-600);
 }
 
@@ -1233,6 +1279,11 @@ textarea { min-height: 120px; resize: vertical; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: 0.01ms !important; }
+  ::view-transition-old(root),
+  ::view-transition-new(root),
+  main > section:not(.hero):not(.page-hero) {
+    animation: none !important;
+  }
   .status-message.visible.error.critical { animation: none; }
   .skeleton { animation: none; }
 }
