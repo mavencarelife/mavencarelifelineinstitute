@@ -123,7 +123,10 @@
               </label>
 
               <button type="submit" class="btn btn-primary">Prepare and copy inquiry</button>
-              <div class="status-message" data-form-status aria-live="polite"></div>
+              <div class="status-message" data-form-status role="status" aria-live="polite" aria-atomic="true">
+                <span data-form-status-text></span>
+                <button class="status-dismiss" type="button" data-status-dismiss aria-label="Dismiss message">×</button>
+              </div>
               <div data-message-preview-wrap hidden>
                 <label>
                   Prepared inquiry (not sent)
