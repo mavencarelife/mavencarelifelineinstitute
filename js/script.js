@@ -139,7 +139,7 @@ function setInquiryCourseFromQuery() {
   const whatsappLinks = document.querySelectorAll('[data-whatsapp-link]');
 
   for (const input of messageInputs) {
-    input.value = formMessage;
+    input.placeholder = formMessage;
   }
 
   for (const field of inquiryFields) {
@@ -169,6 +169,13 @@ function configureWhatsAppLinks() {
     el.target = '_blank';
     el.rel = 'noopener noreferrer';
   }
+}
+
+function setFormStatus(status, message, type, severity = '') {
+  status.querySelector('[data-form-status-text]').textContent = message;
+  status.className = `status-message visible ${type} ${severity}`.trim();
+  status.setAttribute('role', type === 'error' ? 'alert' : 'status');
+  status.setAttribute('aria-live', type === 'error' ? 'assertive' : 'polite');
 }
 
 function populateConfigurableContent() {
@@ -266,18 +273,28 @@ function bindFormHandlers() {
   const form = document.querySelector('[data-inquiry-form]');
   if (!form) return;
 
+  form.noValidate = true;
+  const status = form.querySelector('[data-form-status]');
+  const dismissButton = status.querySelector('[data-status-dismiss]');
+  dismissButton.addEventListener('click', () => {
+    status.classList.remove('visible');
+  });
+
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     const name = form.querySelector('[name="name"]').value.trim();
     const email = form.querySelector('[name="email"]').value.trim();
     const course = form.querySelector('[name="course"]').value.trim();
     const message = form.querySelector('[name="message"]').value.trim();
-    const status = form.querySelector('[data-form-status]');
     const preview = form.querySelector('[data-message-preview]');
 
-    if (!name || !email || !course || !message) {
-      status.textContent = 'Please complete all required fields before preparing your inquiry.';
-      status.className = 'status-message visible error';
+    const invalidField = form.querySelector(':invalid');
+    if (invalidField) {
+      const errorMessage = invalidField.validity.typeMismatch
+        ? 'Please enter a valid email address.'
+        : 'Please complete all required fields before preparing your inquiry.';
+      setFormStatus(status, errorMessage, 'error', 'critical');
+      invalidField.focus();
       return;
     }
 
@@ -297,11 +314,9 @@ function bindFormHandlers() {
         throw new Error('Clipboard access is unavailable in this browser.');
       }
       await navigator.clipboard.writeText(inquiry);
-      status.textContent = 'Inquiry text copied. It has not been sent; email it to the address shown on this page.';
-      status.className = 'status-message visible success';
+      setFormStatus(status, 'Inquiry text copied. It has not been sent; email it to the address shown on this page.', 'success');
     } catch (error) {
-      status.textContent = `${error.message} Your prepared inquiry is shown below so you can select and copy it manually. Nothing has been sent.`;
-      status.className = 'status-message visible error';
+      setFormStatus(status, `${error.message} Your prepared inquiry is shown below so you can select and copy it manually. Nothing has been sent.`, 'error', 'critical');
     }
   });
 }
