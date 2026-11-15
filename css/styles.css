@@ -352,31 +352,23 @@ p { margin: 0 0 1rem; color: var(--muted); }
   margin-top: 1.8rem;
 }
 
-.hero-stats {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 1.4rem;
-  margin-top: 2rem;
-  max-width: 500px;
+.hero-intake {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-top: 1.6rem;
 }
 
-.stat {
-  padding: 0 0.8rem 0 0;
-  border-right: 1px solid rgba(255,255,255,0.35);
-}
-
-.stat:last-child {
-  border-right: 0;
-}
-
-.stat strong {
-  display: block;
-  font-size: 1.35rem;
-  margin-bottom: 0.2rem;
-}
-
-.stat span {
+.hero-intake span {
   color: rgba(255,255,255,0.83);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.hero-intake strong {
+  color: var(--gold);
+  font-size: clamp(1.7rem, 3vw, 2.2rem);
+  line-height: 1.15;
 }
 
 .hero-actions .btn-secondary {
@@ -418,9 +410,13 @@ p { margin: 0 0 1rem; color: var(--muted); }
   place-items: center;
   background: var(--blue-100);
   border-radius: 16px;
-  color: var(--blue-600);
-  font-size: 1.5rem;
   margin-bottom: 1.2rem;
+}
+
+.feature-card .icon img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 
 .course-grid {
@@ -1222,18 +1218,8 @@ textarea { min-height: 120px; resize: vertical; }
   .form-row {
     grid-template-columns: 1fr;
   }
-  .hero-stats {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 0.45rem;
-    margin-top: 1rem;
-  }
-  .hero-stats .stat {
-    padding: 0 0.45rem 0 0;
-  }
-  .hero-stats .stat strong {
-    font-size: 0.95rem;
-  }
-  .hero-stats .stat span { font-size: 0.82rem; }
+  .hero-intake { margin-top: 1.1rem; }
+  .hero-intake strong { font-size: 1.7rem; }
   .hero-grid { padding-bottom: 14.5rem; }
   .hero-image {
     top: auto;
