@@ -17,6 +17,24 @@
 }
 
 * { box-sizing: border-box; }
+* {
+  scrollbar-color: var(--blue-500) var(--blue-50);
+  scrollbar-width: thin;
+}
+*::-webkit-scrollbar {
+  width: 0.65rem;
+  height: 0.65rem;
+}
+*::-webkit-scrollbar-track {
+  border-radius: 999px;
+  background: var(--blue-50);
+}
+*::-webkit-scrollbar-thumb {
+  border: 2px solid var(--blue-50);
+  border-radius: 999px;
+  background: var(--blue-500);
+}
+*::-webkit-scrollbar-thumb:hover { background: var(--blue-600); }
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
