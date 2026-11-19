@@ -12,17 +12,17 @@ const siteConfig = {
     tiktok: 'https://www.tiktok.com/@mavencarelifeline?is_from_webapp=1&sender_device=pc'
   },
   courses: [
-    { name: 'Diploma in Counselling Psychology', duration: '5 Terms', fee: 'KSh 20,000 per Term' },
-    { name: 'Certificate in Counselling Psychology', duration: '3 Terms', fee: 'KSh 20,000 per Term' },
-    { name: 'Certificate in Forensic Psychology', duration: '3 Terms', fee: 'KSh 20,000 per Term' },
-    { name: 'Certificate in Mediation', duration: '40 Hours', fee: 'KSh 25,000' },
-    { name: 'Certificate in Gender & Human Rights', duration: '3 Months', fee: 'KSh 10,000' },
-    { name: 'Certificate in Health Support Service', duration: '6 Months', fee: 'KSh 60,000' },
-    { name: 'Caregiver Level 4', duration: '6 Months', fee: 'KSh 50,000' },
-    { name: 'Certified Nurse Assistant (CNA)', duration: '6 Months', fee: 'KSh 50,000' },
-    { name: 'Certificate in Housekeeping', duration: '2 Months', fee: 'KSh 10,000' },
-    { name: 'Certificate in ICT', duration: '3 Months', fee: 'KSh 15,000' },
-    { name: 'Certified TOT', duration: '2 Months', fee: 'KSh 25,000' }
+    { name: 'Diploma in Counselling Psychology', requirements: 'C-', duration: '5 Terms (2 years)', fee: 'KSh 25,000 per Term' },
+    { name: 'Certificate in Counselling Psychology', requirements: 'D', duration: '6 Terms (1 year)', fee: 'KSh 25,000 per Term' },
+    { name: 'Certificate in Forensic Psychology', requirements: 'KCSE', duration: '3 Terms', fee: 'KSh 20,000 per Term' },
+    { name: 'Certificate in Mediation', requirements: 'KCSE', duration: '40 Hours', fee: 'KSh 25,000' },
+    { name: 'Certificate in Gender & Human Rights', requirements: 'KCSE', duration: '3 Months', fee: 'KSh 10,000' },
+    { name: 'Certificate in Health Support Service', requirements: 'D / KCSE (confirm pathway)', duration: '3 Terms (1 year)', fee: 'KSh 28,000 per Term' },
+    { name: 'Caregiver Level 4', requirements: 'CERT', duration: '2 Terms (2 years)', fee: 'KSh 28,000 per Term' },
+    { name: 'Certified Nurse Assistant (CNA)', requirements: 'KCSE or CERT', duration: '4 Months (KCSE) / 6 Months (CERT)', fee: 'KSh 50,000 per Term' },
+    { name: 'Certificate in Housekeeping', requirements: 'KCSE', duration: '2 Months', fee: 'KSh 10,000' },
+    { name: 'Certificate in ICT', requirements: 'D+', duration: '3 Terms', fee: 'KSh 20,000 per Term' },
+    { name: 'Certified TOT', requirements: 'KCSE', duration: '2 Months', fee: 'KSh 25,000' }
   ]
 };
 
@@ -102,9 +102,9 @@ function renderTableCatalog(selector = '#course-table') {
   const rows = getCourseList().map((course) => `
     <tr data-course-row data-course-name="${course.name}">
       <td>${course.name}</td>
+      <td>${course.requirements}</td>
       <td>${course.duration}</td>
       <td>${course.fee}</td>
-      <td><a class="btn btn-primary inquire-link" href="contact.html?course=${encodeURIComponent(course.name)}">Inquire</a></td>
     </tr>
   `).join('');
 
@@ -290,9 +290,11 @@ function bindFormHandlers() {
 
     const invalidField = form.querySelector(':invalid');
     if (invalidField) {
-      const errorMessage = invalidField.validity.typeMismatch
-        ? 'Please enter a valid email address.'
-        : 'Please complete all required fields before preparing your inquiry.';
+      const errorMessage = invalidField.name === 'contact-consent'
+        ? 'Please confirm consent before preparing your inquiry.'
+        : invalidField.validity.typeMismatch
+          ? 'Please enter a valid email address.'
+          : 'Please complete all required fields before preparing your inquiry.';
       setFormStatus(status, errorMessage, 'error', 'critical');
       invalidField.focus();
       return;
@@ -303,7 +305,8 @@ function bindFormHandlers() {
       `My name is ${name}.`,
       `Email: ${email}`,
       `I would like to inquire about ${course} and the ${siteConfig.intakeLabel} intake.`,
-      message
+      message,
+      'Consent to be contacted about this inquiry: Yes.'
     ].join('\n');
 
     preview.value = inquiry;
